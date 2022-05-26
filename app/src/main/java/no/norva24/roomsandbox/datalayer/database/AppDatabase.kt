@@ -14,7 +14,7 @@ import no.norva24.roomsandbox.datalayer.localdata.entities.OrderLineEntity
         OrderEntity::class,
         OrderLineEntity::class
     ],
-    version = 1,
+    version = 2,
     exportSchema = false
 )
 

@@ -8,5 +8,6 @@ data class OrderLineEntity (
     var ordNo:Int,
     var lnNo:Int,
     var cfDelDt:Int?=null,
+    var dur_dt:Int?=null,
     var description:String?=null,
 )

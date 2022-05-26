@@ -9,8 +9,16 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
+import androidx.room.Index.Order
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import no.norva24.roomsandbox.databinding.ActivityMainBinding
+import no.norva24.roomsandbox.datalayer.localdata.entities.OrderEntity
+import no.norva24.roomsandbox.datalayer.localdata.entities.OrderLineEntity
 import no.norva24.roomsandbox.repositories.Repository
+import kotlin.random.Random
+import kotlin.random.nextInt
 
 class MainActivity : AppCompatActivity() {
 
@@ -26,6 +34,26 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(binding.toolbar)
 
         Repository.getInstance(this)
+
+        val randomizer = Random(1000)
+
+        CoroutineScope(Dispatchers.IO).launch {
+            for(i in 1..10) {
+                Repository.insertReplaceOrder(
+                    OrderEntity(1, i, "Test $i")
+                )
+                for(j in 1 .. 10){
+                    val cfDelDt = randomizer.nextInt(2)
+                    val durDt = randomizer.nextInt(30)
+                    Repository.insertReplaceOrderLine(
+                        OrderLineEntity(1,i,j, cfDelDt = cfDelDt, description = "Value $cfDelDt, $durDt")
+                    )
+                }
+            }
+
+
+        }
+
 
         val navController = findNavController(R.id.nav_host_fragment_content_main)
         appBarConfiguration = AppBarConfiguration(navController.graph)
