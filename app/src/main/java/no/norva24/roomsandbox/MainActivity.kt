@@ -46,7 +46,7 @@ class MainActivity : AppCompatActivity() {
                     val cfDelDt = randomizer.nextInt(2)
                     val durDt = randomizer.nextInt(30)
                     Repository.insertReplaceOrderLine(
-                        OrderLineEntity(1,i,j, cfDelDt = cfDelDt, description = "Value $cfDelDt, $durDt")
+                        OrderLineEntity(1,i,j, cfDelDt = cfDelDt, dur_dt = durDt, description = "Value $cfDelDt, $durDt")
                     )
                 }
             }
